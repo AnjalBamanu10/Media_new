@@ -17,9 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[UserController::class,'index']);
-Route::get('/login',[UserController::class,'loginUser'])->name('login');
+Route::get('/',[UserController::class,'index'])->name('dashboard')->middleware(['auth']);
+
+Route::get('/login',[UserController::class,'loginView'])->name('login');
 Route::get('/sign-up',[UserController::class,'signupUser'])->name('signup');
+Route::post('/login', [Home::class,'loginUser'])->name('loginUser');
 
 Route::post('/sign-up',[Home::class,'registerUser'])->name('RegisterUser');
+
+Route::get('/logout',[Home::class,'logout'])->name('logout');
+
+
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 class Home extends Controller
@@ -26,4 +27,26 @@ class Home extends Controller
     ]);
     return redirect('/login');
 }
+
+    public function loginUser(Request $req)
+    {
+        $req->validate([
+            'email'=>'required',
+            'password'=>'required',
+        ]);
+
+        if(Auth::attempt($req->only('email','password'))){
+            return redirect()->route('dashboard');
+        }
+        else{
+            // dd('user not found');
+            return back()->with('fail',' User Not Found!');
+        }
+    }
+
+    public function logout(){
+        auth()->logout();
+
+        return redirect()->route('login');
+    }
 }

@@ -9,7 +9,10 @@
 <body>
 @extends('layout.app')
 @section('content')
+<form action="{{route('logout')}}" method="get">
 <h1>This dashboard</h1>
+<button type="submit">Log Out</button>
+</form>
 
 @endsection
 </body>

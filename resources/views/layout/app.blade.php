@@ -19,15 +19,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Dashboard</a>
-        </li>
+        @guest
         <li class="nav-item">
           <a class="nav-link" href="{{route('login')}}">Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('signup')}}">Register</a>
         </li>
+        @endguest
+
+        @auth
+          <a class="nav-link" href="{{route('login')}}">{{auth()->user()->name}}</a>
+        @endauth
+
+
       </ul>
     </div>
   </div>
